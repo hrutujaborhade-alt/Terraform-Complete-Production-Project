@@ -33,7 +33,7 @@ resource "aws_vpc_security_group_egress_rule" "alb_outbound" {
     security_group_id = aws_security_group.alb_sg.id
 
     cidr_ipv4 = "0.0.0.0/0"
-    ip_protocol = "-1"
+    ip_protocol = "all"
 
 }
 
