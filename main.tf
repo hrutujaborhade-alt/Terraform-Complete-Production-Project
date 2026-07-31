@@ -69,14 +69,14 @@ private_subnet_ids = module.vpc.private_app_subnet_ids
 target_group_arn = module.alb.target_group_arn
 }
 
-module "ec2" {
-  source = "./modules/ec2"
+# module "ec2" {
+#   source = "./modules/ec2"
   
-}
+# }
 
-resource "aws_instance" "test" {
-  ami = "ami-06067086cf86c58e6"
-  instance_type = "t3.micro"
+# resource "aws_instance" "test" {
+#   ami = "ami-06067086cf86c58e6"
+#   instance_type = "t3.micro"
 
-  subnet_id = module.vpc.public_subnet_ids[0]
-}
+#   subnet_id = module.vpc.public_subnet_ids[0]
+# }
