@@ -34,10 +34,10 @@ variable "private_db_subnet_cidrs" {
   type = list(string)
 }
 
-# variable "ami" {
-#   type = list(string)
-# }
+variable "ami_id" {
+  type = string
+}
 
-# variable "instance_type" {
-#   type = list(string)
-# }
+variable "instance_type" {
+  type = string
+}

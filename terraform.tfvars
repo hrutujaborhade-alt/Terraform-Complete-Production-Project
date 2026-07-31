@@ -19,5 +19,6 @@ private_db_subnet_cidrs = [
   "10.0.21.0/24",
   "10.0.22.0/24"
 ]
+ami_id = "ami-0b6d9d3d33ba97d99"
 
-
+instance_type = "t3.micro"
