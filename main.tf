@@ -69,14 +69,27 @@ private_subnet_ids = module.vpc.private_app_subnet_ids
 target_group_arn = module.alb.target_group_arn
 }
 
-# module "ec2" {
-#   source = "./modules/ec2"
+module "cloudwatch" {
+  source = "./modules/cloudwatch"
   
-# }
+  name_prefix = local.prefix
+  common_tags = local.common_tags
+  
+  notification_mail = var.notification_mail
+  asg_name = module.autoscaling.asg_name
+}
 
-# resource "aws_instance" "test" {
-#   ami = "ami-06067086cf86c58e6"
-#   instance_type = "t3.micro"
+module "rds" {
+  source = "./modules/rds"
 
-#   subnet_id = module.vpc.public_subnet_ids[0]
-# }
+name_prefix = local.prefix
+common_tags = local.common_tags
+
+db_name = var.db_name
+
+db_subnet_ids = module.vpc.private_db_subnet_ids
+db_security_group_ids = module.security-groups.rds_sg_id
+
+db_password = var.db_password
+}
+

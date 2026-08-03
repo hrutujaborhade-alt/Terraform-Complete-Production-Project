@@ -5,7 +5,7 @@
 crash.log
 
 # Variable files
-#*.tfvars
+*.tfvars
 *.tfvars.json
 
 # Terraform CLI configuration
