@@ -39,7 +39,7 @@ resource "aws_db_instance" "mysql" {
   tags = merge(
     var.common_tags,
     {
-      Name = "{var.name_prefix}-rds"
+      Name = "${var.name_prefix}-rds"
     }
   )
 }
