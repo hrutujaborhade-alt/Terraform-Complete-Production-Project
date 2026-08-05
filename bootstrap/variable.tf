@@ -1,5 +1,5 @@
 variable "bucket_name" {
-  default = "infosys_prod_s3_bucket"
+  default = "infosys-prod-s3-bucket"
 }
 
 variable "dynamodb_table_name" {
