@@ -2,7 +2,7 @@ resource "aws_sns_topic" "cloudwatch_alert" {
   tags = merge(
     var.common_tags,
     {
-      Name = "{var.name_prefix}-cloudwatch-alerts}"
+      Name = "{var.name_prefix}-cloudwatch-alerts"
     }
   )
 }
@@ -11,7 +11,7 @@ resource "aws_sns_topic_subscription" "email" {
   topic_arn = aws_sns_topic.cloudwatch_alert.arn
 
   protocol = "email"
-  endpoint = "var.notification_name"
+  endpoint = var.notification_mail
 }
 
 #Scale out policy
