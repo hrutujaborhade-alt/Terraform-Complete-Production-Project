@@ -26,7 +26,7 @@ resource "aws_db_instance" "mysql" {
 
   publicly_accessible     = false
   storage_encrypted       = true
-  backup_retention_period = 7
+  backup_retention_period = 1
   skip_final_snapshot     = true
   multi_az                = false
 

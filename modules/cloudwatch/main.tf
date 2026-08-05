@@ -2,7 +2,7 @@ resource "aws_sns_topic" "cloudwatch_alert" {
   tags = merge(
     var.common_tags,
     {
-      Name = "{var.name_prefix}-cloudwatch-alerts"
+      Name = "{var.name_prefix}-cloudwatch-alerts}"
     }
   )
 }
