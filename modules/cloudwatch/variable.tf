@@ -11,5 +11,5 @@ variable "common_tags" {
 }
 
 variable "asg_name" {
-  
+
 }

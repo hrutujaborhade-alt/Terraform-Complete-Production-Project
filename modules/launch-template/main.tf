@@ -1,14 +1,14 @@
 resource "aws_launch_template" "app" {
-  
-  image_id = var.ami_id
+
+  image_id      = var.ami_id
   instance_type = var.instance_type
 
   vpc_security_group_ids = [var.ec2_security_group_id]
-iam_instance_profile {
-  name = var.instance_profile_name
-}
+  iam_instance_profile {
+    name = var.instance_profile_name
+  }
 
- monitoring {
+  monitoring {
     enabled = true
   }
 
@@ -17,18 +17,18 @@ iam_instance_profile {
     http_tokens   = "required"
   }
 
-    block_device_mappings {
+  block_device_mappings {
     device_name = "/dev/xvda"
 
-    ebs{
-        volume_size = 20
-        volume_type = "gp3"
-        encrypted = true
-        delete_on_termination = false
+    ebs {
+      volume_size           = 20
+      volume_type           = "gp3"
+      encrypted             = true
+      delete_on_termination = false
     }
   }
 
-    user_data = base64encode(<<EOF
+  user_data = base64encode(<<EOF
 #!/bin/bash
 apt-get update -y
 apt-get install nginx -y
@@ -78,36 +78,36 @@ CONFIG
 -s
 
 EOF
-)
+  )
 
-tags = merge(
-  var.common_tags,
-  {
-    Name = "${var.name_prefix}-launch-template"
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${var.name_prefix}-launch-template"
+    }
+  )
+
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = merge(
+      var.common_tags,
+      {
+        Name = "${var.name_prefix}-app-server"
+      }
+    )
   }
-)
 
-tag_specifications {
-  resource_type = "instance"
+  tag_specifications {
+    resource_type = "volume"
 
-  tags = merge(
-    var.common_tags,
-    {
-      Name = "${var.name_prefix}-app-server"
-    }
-  )
-}
-
-tag_specifications {
-  resource_type = "volume"
-
-  tags = merge(
-    var.common_tags,
-    {
-      Name = "${var.name_prefix}-app-volume"
-    }
-  )
+    tags = merge(
+      var.common_tags,
+      {
+        Name = "${var.name_prefix}-app-volume"
+      }
+    )
 
 
- }
+  }
 } 

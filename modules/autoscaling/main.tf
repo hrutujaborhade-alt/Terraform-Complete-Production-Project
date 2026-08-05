@@ -1,10 +1,10 @@
 resource "aws_autoscaling_group" "app" {
-  
-  min_size = 2
-  max_size = 4
+
+  min_size         = 2
+  max_size         = 4
   desired_capacity = 2
 
-  health_check_type = "ELB"
+  health_check_type         = "ELB"
   health_check_grace_period = 300
 
   vpc_zone_identifier = var.private_subnet_ids
@@ -12,15 +12,15 @@ resource "aws_autoscaling_group" "app" {
   target_group_arns = [var.target_group_arn]
 
   launch_template {
-    id = var.launch_template_id
+    id      = var.launch_template_id
     version = "$Latest"
   }
 
-   tag {
+  tag {
 
-    key                 = "Name"
+    key = "Name"
 
-    value               = "${var.name_prefix}-app-server"
+    value = "${var.name_prefix}-app-server"
 
     propagate_at_launch = true
 

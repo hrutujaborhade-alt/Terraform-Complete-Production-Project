@@ -3,5 +3,5 @@ variable "name_prefix" {
 }
 
 variable "common_tags" {
-   type = map(string)
+  type = map(string)
 }

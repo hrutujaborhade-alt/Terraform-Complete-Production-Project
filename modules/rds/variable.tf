@@ -1,5 +1,5 @@
 variable "name_prefix" {
-  
+
 }
 
 variable "common_tags" {
@@ -11,7 +11,7 @@ variable "db_subnet_ids" {
 }
 
 variable "db_security_group_ids" {
-  
+
 }
 
 variable "db_name" {
@@ -19,9 +19,9 @@ variable "db_name" {
 }
 
 variable "db_password" {
-  
+
 }
 
 variable "username" {
-   default = "admin"
+  default = "admin"
 }

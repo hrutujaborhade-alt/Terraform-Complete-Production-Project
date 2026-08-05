@@ -1,5 +1,5 @@
 variable "name_prefix" {
-  
+
 }
 
 variable "common_tags" {
@@ -7,11 +7,11 @@ variable "common_tags" {
 }
 
 variable "launch_template_id" {
-  
+
 }
 
 variable "target_group_arn" {
-  
+
 }
 
 variable "private_subnet_ids" {

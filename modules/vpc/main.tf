@@ -74,12 +74,12 @@ resource "aws_subnet" "private_db" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.this.id
 
-   tags = merge(
+  tags = merge(
     var.common_tags,
     {
       Name = "${var.name_prefix}-igw"
-}
-   )
+    }
+  )
 }
 
 resource "aws_route_table" "public" {
@@ -88,10 +88,10 @@ resource "aws_route_table" "public" {
   route {
     cidr_block = "0.0.0.0/0"
 
-    gateway_id  = aws_internet_gateway.igw.id
+    gateway_id = aws_internet_gateway.igw.id
   }
 
-   tags = merge(
+  tags = merge(
     var.common_tags,
     {
       Name = "${var.name_prefix}-public-rt"
@@ -102,7 +102,7 @@ resource "aws_route_table" "public" {
 resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 
-  count = length(aws_subnet.public)
+  count     = length(aws_subnet.public)
   subnet_id = aws_subnet.public[count.index].id
 }
 
@@ -118,7 +118,7 @@ resource "aws_eip" "eip" {
 }
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.eip.id
-  subnet_id = aws_subnet.public[0].id
+  subnet_id     = aws_subnet.public[0].id
 
   tags = merge(
     var.common_tags,
@@ -127,17 +127,17 @@ resource "aws_nat_gateway" "nat" {
     }
   )
 
-  depends_on = [ aws_internet_gateway.igw ]
+  depends_on = [aws_internet_gateway.igw]
 }
 
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.this.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat.id
   }
-   tags = merge(
+  tags = merge(
     var.common_tags,
     {
       Name = "${var.name_prefix}-private-rt"
@@ -148,13 +148,13 @@ resource "aws_route_table" "private" {
 resource "aws_route_table_association" "private-app" {
   route_table_id = aws_route_table.private.id
 
-  count = length(aws_subnet.private_app)
+  count     = length(aws_subnet.private_app)
   subnet_id = aws_subnet.private_app[count.index].id
 }
 
 resource "aws_route_table_association" "private-db" {
   route_table_id = aws_route_table.private.id
 
-  count = length(aws_subnet.private_db)
+  count     = length(aws_subnet.private_db)
   subnet_id = aws_subnet.private_db[count.index].id
 }
