@@ -5,6 +5,7 @@
 crash.log
 
 # Variable files
+terraform.tfvars
 *.tfvars
 *.tfvars.json
 
