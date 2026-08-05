@@ -25,5 +25,5 @@ instance_type = "t3.micro"
 
 notification_mail = "hrutujaborhade@gmail.com"
 
-db_name     = "app-db"
+db_name     = "appdb"
 db_password = "hrutuja@22"
