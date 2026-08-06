@@ -5,8 +5,8 @@
 crash.log
 
 # Variable files
-terraform.tfvars
-*.tfvars
+terraform.tfvars.example
+
 *.tfvars.json
 
 # Terraform CLI configuration
